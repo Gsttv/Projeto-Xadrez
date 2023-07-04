@@ -3,6 +3,10 @@ package app;
 
 import xadrez.Cor;
 import xadrez.PecaXadrez;
+import xadrez.PosicaoNoXadrez;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class UI {
 
@@ -26,6 +30,18 @@ public class UI {
     public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
     public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
     public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
+
+    public static PosicaoNoXadrez lerpPosicao(Scanner sc){
+        try {
+            String s = sc.nextLine();
+            char coluna = s.charAt(0);
+            int linha = Integer.parseInt(s.substring(1));
+            return new PosicaoNoXadrez(coluna,linha);
+        }catch (RuntimeException e ){
+            throw new InputMismatchException("Erro na leitura dos valores, parametros valiodo são de a1 á h8");
+
+        }
+    }
 
     public static void printTabuleiro(PecaXadrez[][] pecaXadrez) { // Metodo para mostrar o tabuleiro para o usuario
         for (int i = 0; i < pecaXadrez.length; i++) {

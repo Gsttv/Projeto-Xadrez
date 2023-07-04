@@ -46,6 +46,18 @@ public class Tabuleiro {
         peca.posicao = posicao;
     }
 
+    public Peca RomeverPeca(Posicao posicao){
+        if (!posicaoExiste(posicao)){
+            throw new GameException("Posição infomrada não existe");
+        }if(peca(posicao)==null){
+            return null;
+        }
+        Peca temp = peca(posicao);
+        temp.posicao = null;
+        pecas[posicao.getLinha()][posicao.getColuna()] = null;
+        return temp;
+    }
+
     private boolean posicaoExiste(int coluna, int linhas){
         return  linhas>=0 && linhas< linha && coluna>=0 && coluna<colunas;  // metodo para retorna se uma posicao existe
     }
@@ -59,4 +71,6 @@ public class Tabuleiro {
         }
         return peca(posicao)!=null;
     }
+
+
 }

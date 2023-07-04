@@ -1,5 +1,6 @@
 package xadrez;
 
+import jogo.Peca;
 import jogo.Posicao;
 import jogo.Tabuleiro;
 import xadrez.pecas.Rei;
@@ -22,6 +23,28 @@ public class PartidaXadrez {
             }
         }
         return matriz;
+    }
+
+    public PecaXadrez moverPecas(PosicaoNoXadrez posicaoInicial, PosicaoNoXadrez posicaoDestino){
+        Posicao inicio = posicaoInicial.ConvertToPosicao();
+        Posicao destino = posicaoDestino.ConvertToPosicao();
+        validarPosicao(inicio);
+        Peca pecaComida = fazerJogada(inicio,destino);
+        return (PecaXadrez) pecaComida;
+    }
+
+    private Peca fazerJogada(Posicao inicio, Posicao destino){
+        Peca p = tabuleiro.RomeverPeca(inicio);
+        Peca pecaComida = tabuleiro.RomeverPeca(destino);
+        tabuleiro.ColocarPeca(p,destino);
+        return pecaComida;
+
+    }
+
+    private void validarPosicao(Posicao incio){
+        if (!tabuleiro.existePeca(incio)){
+            throw new XadrezException("Não existe peca na posição");
+        }
     }
 
     private void ColocarNovaPeca(char coluna, int linha, PecaXadrez pecaXadrez){
