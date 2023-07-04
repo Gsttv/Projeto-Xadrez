@@ -4,7 +4,9 @@ import jogo.Tabuleiro;
 import xadrez.PartidaXadrez;
 import xadrez.PecaXadrez;
 import xadrez.PosicaoNoXadrez;
+import xadrez.XadrezException;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -15,15 +17,26 @@ public class Main {
         PartidaXadrez partidaXadrez = new PartidaXadrez();
 
         while (true){
-            UI.printTabuleiro(partidaXadrez.getPecas());
-            System.out.println("");
-            System.out.println("Posição de origem: ");
-            PosicaoNoXadrez incial = UI.lerpPosicao(sc);
+            try {
+                UI.limparTela();
+                UI.printTabuleiro(partidaXadrez.getPecas());
+                System.out.println("");
+                System.out.println("Posicao de origem: ");
+                PosicaoNoXadrez incial = UI.lerpPosicao(sc);
 
-            System.out.println("Posição de destino: ");
-            PosicaoNoXadrez destino = UI.lerpPosicao(sc);
+                System.out.println("Posicao de destino: ");
+                PosicaoNoXadrez destino = UI.lerpPosicao(sc);
 
-            PecaXadrez pecaComida = partidaXadrez.moverPecas(incial,destino);
+                PecaXadrez pecaComida = partidaXadrez.moverPecas(incial, destino);
+            }catch (XadrezException x){
+                System.out.println(x.getMessage());
+                sc.nextLine();
+
+            }catch (InputMismatchException i){
+                System.out.println(i.getMessage());
+                sc.nextLine();
+
+            }
         }
 
     }

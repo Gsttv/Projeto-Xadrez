@@ -43,7 +43,7 @@ public class PartidaXadrez {
 
     private void validarPosicao(Posicao incio){
         if (!tabuleiro.existePeca(incio)){
-            throw new XadrezException("Não existe peca na posição");
+            throw new XadrezException("Nao existe peca na posicao");
         }
     }
 

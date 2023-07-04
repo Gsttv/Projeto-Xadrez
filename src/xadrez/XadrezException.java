@@ -1,6 +1,8 @@
 package xadrez;
 
-public class XadrezException extends RuntimeException{
+import jogo.GameException;
+
+public class XadrezException extends GameException {
     private static final long serialVersionUID = 1;
 
     public XadrezException(String message) {
