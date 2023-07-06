@@ -25,10 +25,17 @@ public class PartidaXadrez {
         return matriz;
     }
 
+    public boolean[][] movimentosPossiveis(PosicaoNoXadrez posicaoInicial){
+        Posicao posicao = posicaoInicial.ConvertToPosicao();
+        validarPosicao(posicao);
+        return tabuleiro.peca(posicao).movimentosPossiveis();
+    }
+
     public PecaXadrez moverPecas(PosicaoNoXadrez posicaoInicial, PosicaoNoXadrez posicaoDestino){
         Posicao inicio = posicaoInicial.ConvertToPosicao();
         Posicao destino = posicaoDestino.ConvertToPosicao();
         validarPosicao(inicio);
+        validarPosicaoDestino(inicio,destino);
         Peca pecaComida = fazerJogada(inicio,destino);
         return (PecaXadrez) pecaComida;
     }
@@ -47,6 +54,12 @@ public class PartidaXadrez {
         }
         if (!tabuleiro.peca(incio).existeAlgumMovimentoPossivel()){
             throw new XadrezException("Nao existe movimentos possiveis para a peca escolhida");
+        }
+    }
+
+    private void validarPosicaoDestino(Posicao inicio, Posicao destino){
+        if (!tabuleiro.peca(inicio).movimentoPossivel(destino)){
+            throw new XadrezException("A peca escolhida nao pode se mover para a posicao de destino");
         }
     }
 
