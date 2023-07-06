@@ -2,6 +2,7 @@ package app;
 
 
 import xadrez.Cor;
+import xadrez.PartidaXadrez;
 import xadrez.PecaXadrez;
 import xadrez.PosicaoNoXadrez;
 
@@ -87,5 +88,14 @@ public class UI {
             }
         }
         System.out.print(" ");
+    }
+
+    public static void printPartida(PartidaXadrez partidaXadrez){
+        printTabuleiro(partidaXadrez.getPecas());
+        System.out.println("");
+        System.out.println("Turno : " + partidaXadrez.getTurno());
+        System.out.println("Jogador da vez: " + partidaXadrez.getJogadorAtual());
+
+
     }
 }

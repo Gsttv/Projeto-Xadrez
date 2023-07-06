@@ -9,10 +9,22 @@ import xadrez.pecas.Torre;
 public class PartidaXadrez {
 
     private Tabuleiro tabuleiro;
+    private int Turno;
+    private Cor jogadorAtual;
 
     public PartidaXadrez() {
         tabuleiro = new Tabuleiro(8,8);
+        Turno = 1;
+        jogadorAtual = Cor.WHITE;
         SetupInicial();
+    }
+
+    public int getTurno() {
+        return Turno;
+    }
+
+    public Cor getJogadorAtual() {
+        return jogadorAtual;
     }
 
     public PecaXadrez[][] getPecas(){  // Metodo para retorna uma matriz com as peças
@@ -37,6 +49,7 @@ public class PartidaXadrez {
         validarPosicao(inicio);
         validarPosicaoDestino(inicio,destino);
         Peca pecaComida = fazerJogada(inicio,destino);
+        proximoTurno();
         return (PecaXadrez) pecaComida;
     }
 
@@ -51,6 +64,9 @@ public class PartidaXadrez {
     private void validarPosicao(Posicao incio){
         if (!tabuleiro.existePeca(incio)){
             throw new XadrezException("Nao existe peca na posicao");
+        }
+        if(jogadorAtual != ((PecaXadrez)tabuleiro.peca(incio)).getCor()){
+            throw new XadrezException("Essa peca nao e sua ");
         }
         if (!tabuleiro.peca(incio).existeAlgumMovimentoPossivel()){
             throw new XadrezException("Nao existe movimentos possiveis para a peca escolhida");
@@ -67,6 +83,10 @@ public class PartidaXadrez {
         tabuleiro.ColocarPeca(pecaXadrez,new PosicaoNoXadrez(coluna,linha).ConvertToPosicao());
     }
 
+    public void proximoTurno(){
+        Turno++;
+        jogadorAtual = (jogadorAtual == Cor.WHITE) ? Cor.BLACK : Cor.WHITE;
+    }
     private void SetupInicial(){
         ColocarNovaPeca('c', 1, new Torre(tabuleiro, Cor.WHITE));
         ColocarNovaPeca('c', 2, new Torre(tabuleiro, Cor.WHITE));
