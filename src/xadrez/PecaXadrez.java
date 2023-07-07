@@ -22,5 +22,9 @@ public  abstract class PecaXadrez extends Peca {
         return p != null && p.getCor() != cor;
     }
 
+    public PosicaoNoXadrez getPosicaoNoXarez(){
+        return PosicaoNoXadrez.PosicaoToPosicaoNoXarez(posicao);
+    }
+
 
 }

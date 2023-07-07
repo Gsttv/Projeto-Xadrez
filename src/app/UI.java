@@ -99,6 +99,9 @@ public class UI {
         mostarPecasCapturadas(capturadas);
         System.out.println("Turno : " + partidaXadrez.getTurno());
         System.out.println("Jogador da vez: " + partidaXadrez.getJogadorAtual());
+        if (partidaXadrez.isCheck()){
+            System.out.println("CHECK!");
+        }
     }
 
     public static void mostarPecasCapturadas(List<PecaXadrez> capturadas){
