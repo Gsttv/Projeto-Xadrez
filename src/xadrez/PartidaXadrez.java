@@ -6,11 +6,16 @@ import jogo.Tabuleiro;
 import xadrez.pecas.Rei;
 import xadrez.pecas.Torre;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PartidaXadrez {
 
     private Tabuleiro tabuleiro;
     private int Turno;
     private Cor jogadorAtual;
+    private List<Peca> pecasNoTabuleiro = new ArrayList<>();
+    private List<Peca> pecasCapturadas = new ArrayList<>();
 
     public PartidaXadrez() {
         tabuleiro = new Tabuleiro(8,8);
@@ -57,6 +62,11 @@ public class PartidaXadrez {
         Peca p = tabuleiro.RomeverPeca(inicio);
         Peca pecaComida = tabuleiro.RomeverPeca(destino);
         tabuleiro.ColocarPeca(p,destino);
+        if (pecaComida != null){
+            pecasNoTabuleiro.remove(pecaComida);
+            pecasCapturadas.add(pecaComida);
+        }
+
         return pecaComida;
 
     }
@@ -81,6 +91,7 @@ public class PartidaXadrez {
 
     private void ColocarNovaPeca(char coluna, int linha, PecaXadrez pecaXadrez){
         tabuleiro.ColocarPeca(pecaXadrez,new PosicaoNoXadrez(coluna,linha).ConvertToPosicao());
+        pecasNoTabuleiro.add(pecaXadrez);
     }
 
     public void proximoTurno(){
