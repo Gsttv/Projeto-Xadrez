@@ -83,7 +83,8 @@ public class PartidaXadrez {
     }
 
     private Peca fazerJogada(Posicao inicio, Posicao destino) {
-        Peca p = tabuleiro.RomeverPeca(inicio);
+        PecaXadrez p = (PecaXadrez) tabuleiro.RomeverPeca(inicio);
+        p.increasewMoveCount();
         Peca pecaComida = tabuleiro.RomeverPeca(destino);
         tabuleiro.ColocarPeca(p, destino);
         if (pecaComida != null) {
@@ -96,7 +97,8 @@ public class PartidaXadrez {
     }
 
     private void desfazerJogada(Posicao incial, Posicao destino, Peca pecaCapturada) {
-        Peca p = tabuleiro.RomeverPeca(destino);
+        PecaXadrez p = (PecaXadrez) tabuleiro.RomeverPeca(destino);
+        p.decreasewMoveCount();
         tabuleiro.ColocarPeca(p, incial);
 
         if (pecaCapturada != null) {
