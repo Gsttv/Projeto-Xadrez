@@ -3,10 +3,7 @@ package xadrez;
 import jogo.Peca;
 import jogo.Posicao;
 import jogo.Tabuleiro;
-import xadrez.pecas.Bispo;
-import xadrez.pecas.Peao;
-import xadrez.pecas.Rei;
-import xadrez.pecas.Torre;
+import xadrez.pecas.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -193,9 +190,11 @@ public class PartidaXadrez {
 
     private void SetupInicial() {
         ColocarNovaPeca('a', 1, new Torre(tabuleiro, Cor.WHITE));
+        ColocarNovaPeca('b', 1, new Cavalo(tabuleiro, Cor.WHITE));
         ColocarNovaPeca('c', 1, new Bispo(tabuleiro, Cor.WHITE));
         ColocarNovaPeca('e', 1, new Rei(tabuleiro, Cor.WHITE));
         ColocarNovaPeca('f', 1, new Bispo(tabuleiro, Cor.WHITE));
+        ColocarNovaPeca('g', 1, new Cavalo(tabuleiro, Cor.WHITE));
         ColocarNovaPeca('h', 1, new Torre(tabuleiro, Cor.WHITE));
         ColocarNovaPeca('a', 2, new Peao(tabuleiro, Cor.WHITE));
         ColocarNovaPeca('b', 2, new Peao(tabuleiro, Cor.WHITE));
@@ -208,9 +207,11 @@ public class PartidaXadrez {
 
 
         ColocarNovaPeca('a', 8, new Torre(tabuleiro, Cor.BLACK));
+        ColocarNovaPeca('b', 8, new Cavalo(tabuleiro, Cor.BLACK));
         ColocarNovaPeca('c', 8, new Bispo(tabuleiro, Cor.BLACK));
         ColocarNovaPeca('e', 8, new Rei(tabuleiro, Cor.BLACK));
         ColocarNovaPeca('f', 8, new Bispo(tabuleiro, Cor.BLACK));
+        ColocarNovaPeca('g', 8, new Cavalo(tabuleiro, Cor.BLACK));
         ColocarNovaPeca('h', 8, new Torre(tabuleiro, Cor.BLACK));
         ColocarNovaPeca('a', 7, new Peao(tabuleiro, Cor.BLACK));
         ColocarNovaPeca('b', 7, new Peao(tabuleiro, Cor.BLACK));
