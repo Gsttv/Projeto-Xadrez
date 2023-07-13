@@ -3,6 +3,7 @@ package xadrez;
 import jogo.Peca;
 import jogo.Posicao;
 import jogo.Tabuleiro;
+import xadrez.pecas.Peao;
 import xadrez.pecas.Rei;
 import xadrez.pecas.Torre;
 
@@ -190,12 +191,30 @@ public class PartidaXadrez {
     }
 
     private void SetupInicial() {
-        ColocarNovaPeca('a', 2, new Torre(tabuleiro, Cor.WHITE));
-        ColocarNovaPeca('e', 8, new Torre(tabuleiro, Cor.WHITE));
-        ColocarNovaPeca('d', 8, new Rei(tabuleiro, Cor.WHITE));
+        ColocarNovaPeca('a', 1, new Torre(tabuleiro, Cor.WHITE));
+        ColocarNovaPeca('e', 1, new Rei(tabuleiro, Cor.WHITE));
+        ColocarNovaPeca('h', 1, new Torre(tabuleiro, Cor.WHITE));
+        ColocarNovaPeca('a', 2, new Peao(tabuleiro, Cor.WHITE));
+        ColocarNovaPeca('b', 2, new Peao(tabuleiro, Cor.WHITE));
+        ColocarNovaPeca('c', 2, new Peao(tabuleiro, Cor.WHITE));
+        ColocarNovaPeca('d', 2, new Peao(tabuleiro, Cor.WHITE));
+        ColocarNovaPeca('e', 2, new Peao(tabuleiro, Cor.WHITE));
+        ColocarNovaPeca('f', 2, new Peao(tabuleiro, Cor.WHITE));
+        ColocarNovaPeca('g', 2, new Peao(tabuleiro, Cor.WHITE));
+        ColocarNovaPeca('h', 2, new Peao(tabuleiro, Cor.WHITE));
 
-        ColocarNovaPeca('g', 1, new Torre(tabuleiro, Cor.BLACK));
-        ColocarNovaPeca('h', 1, new Rei(tabuleiro, Cor.BLACK));
+
+        ColocarNovaPeca('a', 8, new Torre(tabuleiro, Cor.BLACK));
+        ColocarNovaPeca('e', 8, new Rei(tabuleiro, Cor.BLACK));
+        ColocarNovaPeca('h', 8, new Torre(tabuleiro, Cor.BLACK));
+        ColocarNovaPeca('a', 7, new Peao(tabuleiro, Cor.BLACK));
+        ColocarNovaPeca('b', 7, new Peao(tabuleiro, Cor.BLACK));
+        ColocarNovaPeca('c', 7, new Peao(tabuleiro, Cor.BLACK));
+        ColocarNovaPeca('d', 7, new Peao(tabuleiro, Cor.BLACK));
+        ColocarNovaPeca('e', 7, new Peao(tabuleiro, Cor.BLACK));
+        ColocarNovaPeca('f', 7, new Peao(tabuleiro, Cor.BLACK));
+        ColocarNovaPeca('g', 7, new Peao(tabuleiro, Cor.BLACK));
+        ColocarNovaPeca('h', 7, new Peao(tabuleiro, Cor.BLACK));
 
 
     }
