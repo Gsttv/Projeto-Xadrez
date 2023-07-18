@@ -5,6 +5,7 @@ import jogo.Posicao;
 import jogo.Tabuleiro;
 import xadrez.pecas.*;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +19,7 @@ public class PartidaXadrez {
     private List<Peca> pecasCapturadas = new ArrayList<>();
     private boolean check;
     private boolean checkMate;
+    private PecaXadrez promoted;
 
 
     public PartidaXadrez() {
@@ -39,7 +41,9 @@ public class PartidaXadrez {
         return check;
     }
 
-
+    public PecaXadrez getPromoted() {
+        return promoted;
+    }
 
     public PecaXadrez[][] getPecas() {  // Metodo para retorna uma matriz com as peças
         PecaXadrez[][] matriz = new PecaXadrez[tabuleiro.getLinha()][tabuleiro.getColunas()];
@@ -71,6 +75,18 @@ public class PartidaXadrez {
             desfazerJogada(inicio, destino, pecaComida);
             throw new XadrezException("Voce nao pode se colocar em check ");
         }
+
+        PecaXadrez pecaMovida = (PecaXadrez)tabuleiro.peca(destino);
+
+        // promoted
+        promoted = null;
+        if (pecaMovida instanceof Peao){
+            if ((pecaMovida.getCor() == Cor.WHITE && destino.getColuna() == 0) || (pecaMovida.getCor() == Cor.BLACK && destino.getColuna() == 7)){
+                promoted = (PecaXadrez) tabuleiro.peca(destino);
+                promoted = replacePromotedPiece("Q");
+            }
+        }
+
         check = testCheck(corDoOponente(jogadorAtual)) ? true : false;
         if (testCheckMate(corDoOponente(jogadorAtual))){
             checkMate = true;
@@ -80,6 +96,33 @@ public class PartidaXadrez {
 
         return (PecaXadrez) pecaComida;
     }
+
+    public PecaXadrez replacePromotedPiece(String type){
+        if (promoted == null){
+            throw new IllegalStateException("Nao existe peca para ser promovida");
+        }
+        if (!type.equals("T") && !type.equals("C") && !type.equals("Q")&& !type.equals("B")){
+            throw new InvalidParameterException("Parametro invalido");
+        }
+        Posicao pos = promoted.getPosicaoNoXarez().ConvertToPosicao();
+        Peca p = tabuleiro.RomeverPeca(pos);
+        pecasNoTabuleiro.remove(p);
+
+        PecaXadrez novaPeca = novaPeca(type,promoted.getCor());
+        tabuleiro.ColocarPeca(novaPeca,pos);
+        pecasNoTabuleiro.add(novaPeca);
+        return novaPeca;
+    }
+
+    private PecaXadrez novaPeca (String type, Cor cor){
+        if (type.equals("T")) return new Torre(tabuleiro,cor);
+        if (type.equals("C")) return new Cavalo(tabuleiro,cor);
+        if (type.equals("Q")) return new Rainha(tabuleiro,cor);
+        return new Bispo(tabuleiro,cor);
+    }
+
+
+
 
     private Peca fazerJogada(Posicao inicio, Posicao destino) {
         PecaXadrez p = (PecaXadrez) tabuleiro.RomeverPeca(inicio);

@@ -39,6 +39,11 @@ public class Main {
                     capturas.add(pecaComida);
                 }
 
+                if (partidaXadrez.getPromoted() != null){
+                    System.out.println("Digite a letra para promocao (C/T/R/B): ");
+                    String type = sc.nextLine();
+                    partidaXadrez.replacePromotedPiece(type);
+                }
 
             }catch (XadrezException x){
                 System.out.println(x.getMessage());

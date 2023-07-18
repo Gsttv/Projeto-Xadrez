@@ -94,7 +94,7 @@ public class Rei extends PecaXadrez {
                 Posicao p1 = new Posicao(posicao.getLinha(), posicao.getColuna()+1);
                 Posicao p2 = new Posicao(posicao.getLinha(), posicao.getColuna()+2);
                 if (getTabuleiro().peca(p1) == null && getTabuleiro().peca(p2) == null ){
-                    mat[posicao.getLinha()][posicao.getColuna() + 2] =  true;1
+                    mat[posicao.getLinha()][posicao.getColuna() + 2] =  true;
                 }
             }
             Posicao posT2 = new Posicao(posicao.getLinha(), posicao.getColuna()-4);
